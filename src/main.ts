@@ -5,6 +5,9 @@ import { ValidationError, ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('/api', {
+    exclude: ['/images/(.*)'], // Mengecualikan rute untuk file statis
+  });
 
   app.useGlobalFilters(new ValidationFilter());
   app.useGlobalPipes(
